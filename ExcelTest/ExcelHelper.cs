@@ -15,30 +15,35 @@ namespace ExcelTest
     {
 
 
-        #region 保存数据列表到Excel（泛型）+void SaveToExcel<T>(IEnumerable<T> data, string FileName, string OpenPassword = "")
+        #region 保存数据列表到Excel（泛型）
         /// <summary>
         /// 保存数据列表到Excel（泛型）
         /// </summary>
         /// <typeparam name="T">集合数据类型</typeparam>
         /// <param name="data">数据列表</param>
-        /// <param name="FileName">Excel文件</param>
+        /// <param name="FilePath">Excel文件路径</param>
         /// <param name="OpenPassword">Excel打开密码</param>
-        public static void SaveToExcel<T>(IEnumerable<T> data, string FileName, string OpenPassword = "")
+        public static void SaveToExcel<T>(IEnumerable<T> data, string FilePath, string OpenPassword = "")
         {
-            FileInfo file = new FileInfo(FileName);
+            FileInfo file = new FileInfo(FilePath);
+            if (file.Exists)
+            {
+                file.Delete();//保证只有一个workbook，不然后面会报错
+                file = new FileInfo(FilePath);
+            }            
             try
             {
-                using (ExcelPackage ep = new ExcelPackage(file, OpenPassword))
+                using (ExcelPackage ep = new ExcelPackage(file))
                 {
                     ExcelWorksheet ws = ep.Workbook.Worksheets.Add(typeof(T).Name);
                     ws.Cells["A1"].LoadFromCollection(data, true, TableStyles.Medium10);
 
-                    ep.Save(OpenPassword);
+                    ep.Save();
                 }
             }
             catch (InvalidOperationException ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
         }
         #endregion
@@ -46,16 +51,16 @@ namespace ExcelTest
 
 
 
-        #region 从Excel中加载数据（泛型）+IEnumerable<T> LoadFromExcel<T>(string FileName) where T : new()
+        #region 从Excel中加载数据（泛型）
         /// <summary>
         /// 从Excel中加载数据（泛型）
         /// </summary>
         /// <typeparam name="T">每行数据的类型</typeparam>
-        /// <param name="FileName">Excel文件名</param>
+        /// <param name="FilePath">Excel文件路径</param>
         /// <returns>泛型列表</returns>
-        private static IEnumerable<T> LoadFromExcel<T>(string FileName) where T : new()
+        public static IEnumerable<T> LoadFromExcel<T>(string FilePath) where T : new()
         {
-            FileInfo existingFile = new FileInfo(FileName);
+            FileInfo existingFile = new FileInfo(FilePath);
             List<T> resultList = new List<T>();
             Dictionary<string, int> dictHeader = new Dictionary<string, int>();
 
@@ -76,7 +81,7 @@ namespace ExcelTest
 
                 List<PropertyInfo> propertyInfoList = new List<PropertyInfo>(typeof(T).GetProperties());
 
-                for (int row = rowStart + 1; row < rowEnd; row++)
+                for (int row = rowStart + 1; row <= rowEnd; row++)
                 {
                     T result = new T();
 
@@ -161,12 +166,8 @@ namespace ExcelTest
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                //创建泛型对象。为什么这里要创建一个泛型对象呢？是因为目前我不确定泛型的类型。  
+                //创建泛型对象  
                 T t = Activator.CreateInstance<T>();
-
-
-                //获取t对象类型的所有公有属性。但是我不建议吧这条语句写在for循环里，因为没循环一次就要获取一次，占用资源，所以建议写在外面  
-                //PropertyInfo[] tMembersAll = t.GetType().GetProperties();  
 
 
                 for (int j = 0; j < dt.Columns.Count; j++)
@@ -181,9 +182,8 @@ namespace ExcelTest
                             if (dt.Rows[i][j] != DBNull.Value)
                             {
                                 //SetValue是指：将指定属性设置为指定值。 tMember是T泛型对象t的一个公有成员，整条代码的意思就是：将dt.Rows[i][j]赋值给t对象的tMember成员,参数详情请参照http://msdn.microsoft.com/zh-cn/library/3z2t396t(v=vs.100).aspx/html  
-
+                                // TODO:模型类型和DataTable的类型不一致，如一个是int，一个是string
                                 tMember.SetValue(t, dt.Rows[i][j], null);
-
 
                             }
                             else

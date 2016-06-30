@@ -33,25 +33,25 @@
             this.buttonInExcel = new System.Windows.Forms.Button();
             this.buttonOutExcel = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.userInformationBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.excelTestDBDataSet1 = new ExcelTest.ExcelTestDBDataSet1();
-            this.labelExcelUrl = new System.Windows.Forms.Label();
-            this.userInformationBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.userInformationTableAdapter1 = new ExcelTest.ExcelTestDBDataSet1TableAdapters.UserInformationTableAdapter();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.paymentAccountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.adressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gasTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.factoryNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.areaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.communityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.floorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paymentAccount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.customerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.adress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gasType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.factoryNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.area = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.community = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.floor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userInformationBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.excelTestDBDataSet1 = new ExcelTest.ExcelTestDBDataSet1();
+            this.userInformationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.labelExcelUrl = new System.Windows.Forms.Label();
+            this.userInformationTableAdapter1 = new ExcelTest.ExcelTestDBDataSet1TableAdapters.UserInformationTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInformationBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.excelTestDBDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userInformationBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.excelTestDBDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userInformationBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxExcelPath
@@ -67,20 +67,21 @@
             // 
             this.buttonInExcel.Location = new System.Drawing.Point(406, 11);
             this.buttonInExcel.Name = "buttonInExcel";
-            this.buttonInExcel.Size = new System.Drawing.Size(75, 23);
+            this.buttonInExcel.Size = new System.Drawing.Size(109, 23);
             this.buttonInExcel.TabIndex = 1;
-            this.buttonInExcel.Text = "导入Excel";
+            this.buttonInExcel.Text = "数据库导出Excel";
             this.buttonInExcel.UseVisualStyleBackColor = true;
             this.buttonInExcel.Click += new System.EventHandler(this.buttonInExcel_Click);
             // 
             // buttonOutExcel
             // 
-            this.buttonOutExcel.Location = new System.Drawing.Point(488, 11);
+            this.buttonOutExcel.Location = new System.Drawing.Point(521, 11);
             this.buttonOutExcel.Name = "buttonOutExcel";
-            this.buttonOutExcel.Size = new System.Drawing.Size(75, 23);
+            this.buttonOutExcel.Size = new System.Drawing.Size(103, 23);
             this.buttonOutExcel.TabIndex = 2;
-            this.buttonOutExcel.Text = "导出Excel";
+            this.buttonOutExcel.Text = "Excel导入数据库";
             this.buttonOutExcel.UseVisualStyleBackColor = true;
+            this.buttonOutExcel.Click += new System.EventHandler(this.buttonOutExcel_Click);
             // 
             // dataGridView1
             // 
@@ -88,15 +89,15 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
-            this.paymentAccountDataGridViewTextBoxColumn,
-            this.customerNameDataGridViewTextBoxColumn,
-            this.adressDataGridViewTextBoxColumn,
-            this.phoneNumberDataGridViewTextBoxColumn,
-            this.gasTypeDataGridViewTextBoxColumn,
-            this.factoryNumberDataGridViewTextBoxColumn,
-            this.areaDataGridViewTextBoxColumn,
-            this.communityDataGridViewTextBoxColumn,
-            this.floorDataGridViewTextBoxColumn});
+            this.paymentAccount,
+            this.customerName,
+            this.adress,
+            this.phoneNumber,
+            this.gasType,
+            this.factoryNumber,
+            this.area,
+            this.community,
+            this.floor});
             this.dataGridView1.DataSource = this.userInformationBindingSource1;
             this.dataGridView1.Location = new System.Drawing.Point(13, 41);
             this.dataGridView1.Name = "dataGridView1";
@@ -104,15 +105,81 @@
             this.dataGridView1.Size = new System.Drawing.Size(701, 327);
             this.dataGridView1.TabIndex = 3;
             // 
-            // userInformationBindingSource
+            // Id
             // 
-            this.userInformationBindingSource.DataMember = "UserInformation";
-            this.userInformationBindingSource.DataSource = this.excelTestDBDataSet1;
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // paymentAccount
+            // 
+            this.paymentAccount.DataPropertyName = "PaymentAccount";
+            this.paymentAccount.HeaderText = "缴费账户";
+            this.paymentAccount.Name = "paymentAccount";
+            // 
+            // customerName
+            // 
+            this.customerName.DataPropertyName = "CustomerName";
+            this.customerName.HeaderText = "用户姓名";
+            this.customerName.Name = "customerName";
+            // 
+            // adress
+            // 
+            this.adress.DataPropertyName = "Adress";
+            this.adress.HeaderText = "联系地址";
+            this.adress.Name = "adress";
+            // 
+            // phoneNumber
+            // 
+            this.phoneNumber.DataPropertyName = "PhoneNumber";
+            this.phoneNumber.HeaderText = "联系电话";
+            this.phoneNumber.Name = "phoneNumber";
+            // 
+            // gasType
+            // 
+            this.gasType.DataPropertyName = "GasType";
+            this.gasType.HeaderText = "用气类型";
+            this.gasType.Name = "gasType";
+            // 
+            // factoryNumber
+            // 
+            this.factoryNumber.DataPropertyName = "FactoryNumber";
+            this.factoryNumber.HeaderText = "出厂号码";
+            this.factoryNumber.Name = "factoryNumber";
+            // 
+            // area
+            // 
+            this.area.DataPropertyName = "Area";
+            this.area.HeaderText = "片区";
+            this.area.Name = "area";
+            // 
+            // community
+            // 
+            this.community.DataPropertyName = "Community";
+            this.community.HeaderText = "小区";
+            this.community.Name = "community";
+            // 
+            // floor
+            // 
+            this.floor.DataPropertyName = "Floor";
+            this.floor.HeaderText = "楼栋";
+            this.floor.Name = "floor";
+            // 
+            // userInformationBindingSource1
+            // 
+            this.userInformationBindingSource1.DataMember = "UserInformation";
+            this.userInformationBindingSource1.DataSource = this.excelTestDBDataSet1;
             // 
             // excelTestDBDataSet1
             // 
             this.excelTestDBDataSet1.DataSetName = "ExcelTestDBDataSet1";
             this.excelTestDBDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // userInformationBindingSource
+            // 
+            this.userInformationBindingSource.DataMember = "UserInformation";
+            this.userInformationBindingSource.DataSource = this.excelTestDBDataSet1;
             // 
             // labelExcelUrl
             // 
@@ -123,75 +190,9 @@
             this.labelExcelUrl.TabIndex = 4;
             this.labelExcelUrl.Text = "Excel地址(可以拖拽)：";
             // 
-            // userInformationBindingSource1
-            // 
-            this.userInformationBindingSource1.DataMember = "UserInformation";
-            this.userInformationBindingSource1.DataSource = this.excelTestDBDataSet1;
-            // 
             // userInformationTableAdapter1
             // 
             this.userInformationTableAdapter1.ClearBeforeFill = true;
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
-            // paymentAccountDataGridViewTextBoxColumn
-            // 
-            this.paymentAccountDataGridViewTextBoxColumn.DataPropertyName = "PaymentAccount";
-            this.paymentAccountDataGridViewTextBoxColumn.HeaderText = "缴费账户";
-            this.paymentAccountDataGridViewTextBoxColumn.Name = "paymentAccountDataGridViewTextBoxColumn";
-            // 
-            // customerNameDataGridViewTextBoxColumn
-            // 
-            this.customerNameDataGridViewTextBoxColumn.DataPropertyName = "CustomerName";
-            this.customerNameDataGridViewTextBoxColumn.HeaderText = "用户姓名";
-            this.customerNameDataGridViewTextBoxColumn.Name = "customerNameDataGridViewTextBoxColumn";
-            // 
-            // adressDataGridViewTextBoxColumn
-            // 
-            this.adressDataGridViewTextBoxColumn.DataPropertyName = "Adress";
-            this.adressDataGridViewTextBoxColumn.HeaderText = "联系地址";
-            this.adressDataGridViewTextBoxColumn.Name = "adressDataGridViewTextBoxColumn";
-            // 
-            // phoneNumberDataGridViewTextBoxColumn
-            // 
-            this.phoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber";
-            this.phoneNumberDataGridViewTextBoxColumn.HeaderText = "联系电话";
-            this.phoneNumberDataGridViewTextBoxColumn.Name = "phoneNumberDataGridViewTextBoxColumn";
-            // 
-            // gasTypeDataGridViewTextBoxColumn
-            // 
-            this.gasTypeDataGridViewTextBoxColumn.DataPropertyName = "GasType";
-            this.gasTypeDataGridViewTextBoxColumn.HeaderText = "用气类型";
-            this.gasTypeDataGridViewTextBoxColumn.Name = "gasTypeDataGridViewTextBoxColumn";
-            // 
-            // factoryNumberDataGridViewTextBoxColumn
-            // 
-            this.factoryNumberDataGridViewTextBoxColumn.DataPropertyName = "FactoryNumber";
-            this.factoryNumberDataGridViewTextBoxColumn.HeaderText = "出厂号码";
-            this.factoryNumberDataGridViewTextBoxColumn.Name = "factoryNumberDataGridViewTextBoxColumn";
-            // 
-            // areaDataGridViewTextBoxColumn
-            // 
-            this.areaDataGridViewTextBoxColumn.DataPropertyName = "Area";
-            this.areaDataGridViewTextBoxColumn.HeaderText = "片区";
-            this.areaDataGridViewTextBoxColumn.Name = "areaDataGridViewTextBoxColumn";
-            // 
-            // communityDataGridViewTextBoxColumn
-            // 
-            this.communityDataGridViewTextBoxColumn.DataPropertyName = "Community";
-            this.communityDataGridViewTextBoxColumn.HeaderText = "小区";
-            this.communityDataGridViewTextBoxColumn.Name = "communityDataGridViewTextBoxColumn";
-            // 
-            // floorDataGridViewTextBoxColumn
-            // 
-            this.floorDataGridViewTextBoxColumn.DataPropertyName = "Floor";
-            this.floorDataGridViewTextBoxColumn.HeaderText = "楼栋";
-            this.floorDataGridViewTextBoxColumn.Name = "floorDataGridViewTextBoxColumn";
             // 
             // Form1
             // 
@@ -207,9 +208,9 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userInformationBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.excelTestDBDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userInformationBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.excelTestDBDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userInformationBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,15 +228,15 @@
         private System.Windows.Forms.BindingSource userInformationBindingSource1;
         private ExcelTestDBDataSet1TableAdapters.UserInformationTableAdapter userInformationTableAdapter1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn paymentAccountDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customerNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn adressDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gasTypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn factoryNumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn areaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn communityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn floorDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn paymentAccount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn adress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gasType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn factoryNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn area;
+        private System.Windows.Forms.DataGridViewTextBoxColumn community;
+        private System.Windows.Forms.DataGridViewTextBoxColumn floor;
     }
 }
 
