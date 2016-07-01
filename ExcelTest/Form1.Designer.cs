@@ -48,6 +48,7 @@
             this.userInformationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelExcelUrl = new System.Windows.Forms.Label();
             this.userInformationTableAdapter1 = new ExcelTest.ExcelTestDBDataSet1TableAdapters.UserInformationTableAdapter();
+            this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userInformationBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.excelTestDBDataSet1)).BeginInit();
@@ -99,10 +100,10 @@
             this.community,
             this.floor});
             this.dataGridView1.DataSource = this.userInformationBindingSource1;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 41);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 41);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(701, 327);
+            this.dataGridView1.Size = new System.Drawing.Size(461, 368);
             this.dataGridView1.TabIndex = 3;
             // 
             // Id
@@ -194,11 +195,20 @@
             // 
             this.userInformationTableAdapter1.ClearBeforeFill = true;
             // 
+            // richTextBoxLog
+            // 
+            this.richTextBoxLog.Location = new System.Drawing.Point(479, 41);
+            this.richTextBoxLog.Name = "richTextBoxLog";
+            this.richTextBoxLog.Size = new System.Drawing.Size(235, 368);
+            this.richTextBoxLog.TabIndex = 5;
+            this.richTextBoxLog.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(726, 380);
+            this.ClientSize = new System.Drawing.Size(726, 421);
+            this.Controls.Add(this.richTextBoxLog);
             this.Controls.Add(this.labelExcelUrl);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.buttonOutExcel);
@@ -237,6 +247,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn area;
         private System.Windows.Forms.DataGridViewTextBoxColumn community;
         private System.Windows.Forms.DataGridViewTextBoxColumn floor;
+        private System.Windows.Forms.RichTextBox richTextBoxLog;
     }
 }
 

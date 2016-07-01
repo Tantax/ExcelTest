@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 
 namespace ExcelTest
 {
+    /// <summary>
+    /// 使用EPPlus，下载地址：http://epplus.codeplex.com/releases/view/118053
+    /// 版本：4.0.5
+    /// </summary>
     public class ExcelHelper
     {
 

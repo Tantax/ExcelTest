@@ -17,12 +17,20 @@ namespace Dal
         /// </summary>
         private void GetConnection()
         {
-            con = new SqlConnection(strCon);
+            if (con == null)
+            {
+                con = new SqlConnection(strCon);
+            }            
             if (con.State != ConnectionState.Open)
             {
                 con.Close();
                 con.Open();
             }
+        }
+        public SqlConnection GetConnectionObject()
+        {
+            GetConnection();
+            return con;
         }
         /// <summary>
         /// 关闭连接

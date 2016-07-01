@@ -102,9 +102,35 @@ namespace ExcelTest
         {
             if (IsInput(this.textBoxExcelPath))
             {
+                DateTime transactionStart, transactionEnd, loadFromExcelStart, loadFrmExcelEnd;
+                loadFromExcelStart = DateTime.Now;
                 var excelList = ExcelHelper.LoadFromExcel<ExcelModel>(this.textBoxExcelPath.Text);
-                foreach (var item in excelList)
+                loadFrmExcelEnd = DateTime.Now;
+                this.richTextBoxLog.AppendText("LoadFromExcel函数执行时间为：" + (loadFrmExcelEnd - loadFromExcelStart).ToString() + Environment.NewLine);
+                //List<SqlParameter> spList = new List<SqlParameter>();
+                SqlParameter sp0 = new SqlParameter("@paymentaccount", SqlDbType.BigInt);
+                SqlParameter sp1 = new SqlParameter("@customername", SqlDbType.NVarChar, 10);
+                SqlParameter sp2 = new SqlParameter("@adress", SqlDbType.NVarChar);
+                SqlParameter sp3 = new SqlParameter("@phonenumber", SqlDbType.VarChar, 30);
+                SqlParameter sp4 = new SqlParameter("@gastype", SqlDbType.NVarChar, 50);
+                SqlParameter sp5 = new SqlParameter("@factorynumber", SqlDbType.NChar, 20);
+                SqlParameter sp6 = new SqlParameter("@area", SqlDbType.NVarChar, 50);
+                SqlParameter sp7 = new SqlParameter("@community", SqlDbType.NVarChar, 50);
+                SqlParameter sp8 = new SqlParameter("@floor", SqlDbType.NVarChar, 50);
+                // 获取数据库连接
+                SqlConnection connection = sqlHelper.GetConnectionObject();
+                SqlCommand command = connection.CreateCommand();
+                SqlTransaction transaction;
+                transactionStart = DateTime.Now;
+                //启动事务
+                transaction = connection.BeginTransaction("SampleTransaction");
+
+                //设定SqlCommand的事务和连接对象
+                //command.Connection = connection;
+                command.Transaction = transaction;
+                try
                 {
+                    int cntLog = 0;// 插入数据计数
                     string sql = @"INSERT INTO UserInformation
 	                                (
 	                                PaymentAccount,
@@ -129,38 +155,56 @@ namespace ExcelTest
 	                                @community,
 	                                @floor
 	                                )";
-                    List<SqlParameter> spList = new List<SqlParameter>();
-                    SqlParameter sp0 = new SqlParameter("@paymentaccount", SqlDbType.BigInt);
-                    SqlParameter sp1 = new SqlParameter("@customername", SqlDbType.NVarChar, 10);
-                    SqlParameter sp2 = new SqlParameter("@adress", SqlDbType.NVarChar);
-                    SqlParameter sp3 = new SqlParameter("@phonenumber", SqlDbType.VarChar, 30);
-                    SqlParameter sp4 = new SqlParameter("@gastype", SqlDbType.NVarChar, 50);
-                    SqlParameter sp5 = new SqlParameter("@factorynumber", SqlDbType.NChar, 20);
-                    SqlParameter sp6 = new SqlParameter("@area", SqlDbType.NVarChar, 50);
-                    SqlParameter sp7 = new SqlParameter("@community", SqlDbType.NVarChar, 50);
-                    SqlParameter sp8 = new SqlParameter("@floor", SqlDbType.NVarChar, 50);
-                    sp0.Value = item.PaymentAccount;                    
-                    sp1.Value = item.CustomerName;
-                    sp2.Value = item.Adress;
-                    sp3.Value = item.PhoneNumber;
-                    sp4.Value = item.GasType;
-                    sp5.Value = item.FactoryNumber;
-                    sp6.Value = item.Area;
-                    sp7.Value = item.Community;
-                    sp8.Value = item.Floor;
-                    spList.Add(sp0);
-                    spList.Add(sp1);
-                    spList.Add(sp2);
-                    spList.Add(sp3);
-                    spList.Add(sp4);
-                    spList.Add(sp5);
-                    spList.Add(sp6);
-                    spList.Add(sp7);
-                    spList.Add(sp8);
-                    sqlHelper.GetExecuteNonQuery(sql, spList);
+                    command.CommandText = sql;
+                    SqlParameter[] sqlParameterArray = new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6, sp7, sp8 };
+                    foreach (var item in excelList)
+                    {
+                        sqlParameterArray[0].Value = item.PaymentAccount;
+                        sqlParameterArray[1].Value = item.CustomerName;
+                        sqlParameterArray[2].Value = item.Adress;
+                        sqlParameterArray[3].Value = item.PhoneNumber == null ? "" : item.PhoneNumber;
+                        sqlParameterArray[4].Value = item.GasType == null ? "" : item.GasType;
+                        sqlParameterArray[5].Value = item.FactoryNumber == null ? "" : item.FactoryNumber;
+                        sqlParameterArray[6].Value = item.Area;
+                        sqlParameterArray[7].Value = item.Community;
+                        sqlParameterArray[8].Value = item.Floor;
+                        //spList.Clear();  // 清空List
+                        //spList.Add(sp0);
+                        //spList.Add(sp1);
+                        //spList.Add(sp2);
+                        //spList.Add(sp3);
+                        //spList.Add(sp4);
+                        //spList.Add(sp5);
+                        //spList.Add(sp6);
+                        //spList.Add(sp7);
+                        //spList.Add(sp8);
+                        //SqlCommand sqlCmd = sqlHelper.GetCommand(sql, spList);
+                        //int result = sqlCmd.ExecuteNonQuery();
+                        //sqlHelper.GetExecuteNonQuery(sql, spList);
+                        command.Parameters.Clear();
+                        command.Parameters.AddRange(sqlParameterArray);
+                        cntLog += command.ExecuteNonQuery();
+
+                    }
+                    // 完成提交
+                    transaction.Commit();
+                    transactionEnd = DateTime.Now;
+                    this.richTextBoxLog.AppendText("完成提交。" + Environment.NewLine);
+                    this.richTextBoxLog.AppendText("共插入" + cntLog + "条数据" + Environment.NewLine);
+                    this.richTextBoxLog.AppendText("总共耗时：" + (transactionEnd - transactionStart).ToString() + Environment.NewLine);
+                }
+                catch (Exception ex)
+                {
+                    this.richTextBoxLog.AppendText("出错，错误信息：" + ex.Message + Environment.NewLine + "数据回滚..." + Environment.NewLine);
+                    //数据回滚
+                    transaction.Rollback();
+                }
+                finally
+                {
+                    sqlHelper.CloseConnection();
+                    this.richTextBoxLog.AppendText("结束。" + Environment.NewLine);
                 }
             }
-
         }
 
         /// <summary>
