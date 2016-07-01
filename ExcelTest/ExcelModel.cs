@@ -9,7 +9,7 @@ namespace ExcelTest
    public class ExcelModel
     {
        public int Id { get; set; }
-       public long PaymentAccount { get; set; }
+       public string PaymentAccount { get; set; }
        public string CustomerName { get; set; }
        public string Adress { get; set; }
        public string PhoneNumber { get; set; }

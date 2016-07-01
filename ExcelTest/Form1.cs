@@ -108,15 +108,15 @@ namespace ExcelTest
                 loadFrmExcelEnd = DateTime.Now;
                 this.richTextBoxLog.AppendText("LoadFromExcel函数执行时间为：" + (loadFrmExcelEnd - loadFromExcelStart).ToString() + Environment.NewLine);
                 //List<SqlParameter> spList = new List<SqlParameter>();
-                SqlParameter sp0 = new SqlParameter("@paymentaccount", SqlDbType.BigInt);
-                SqlParameter sp1 = new SqlParameter("@customername", SqlDbType.NVarChar, 10);
+                SqlParameter sp0 = new SqlParameter("@paymentaccount", SqlDbType.NVarChar);
+                SqlParameter sp1 = new SqlParameter("@customername", SqlDbType.NVarChar);
                 SqlParameter sp2 = new SqlParameter("@adress", SqlDbType.NVarChar);
-                SqlParameter sp3 = new SqlParameter("@phonenumber", SqlDbType.VarChar, 30);
-                SqlParameter sp4 = new SqlParameter("@gastype", SqlDbType.NVarChar, 50);
-                SqlParameter sp5 = new SqlParameter("@factorynumber", SqlDbType.NChar, 20);
-                SqlParameter sp6 = new SqlParameter("@area", SqlDbType.NVarChar, 50);
-                SqlParameter sp7 = new SqlParameter("@community", SqlDbType.NVarChar, 50);
-                SqlParameter sp8 = new SqlParameter("@floor", SqlDbType.NVarChar, 50);
+                SqlParameter sp3 = new SqlParameter("@phonenumber", SqlDbType.NVarChar);
+                SqlParameter sp4 = new SqlParameter("@gastype", SqlDbType.NVarChar);
+                SqlParameter sp5 = new SqlParameter("@factorynumber", SqlDbType.NVarChar);
+                SqlParameter sp6 = new SqlParameter("@area", SqlDbType.NVarChar);
+                SqlParameter sp7 = new SqlParameter("@community", SqlDbType.NVarChar);
+                SqlParameter sp8 = new SqlParameter("@floor", SqlDbType.NVarChar);
                 // 获取数据库连接
                 SqlConnection connection = sqlHelper.GetConnectionObject();
                 SqlCommand command = connection.CreateCommand();
@@ -131,7 +131,7 @@ namespace ExcelTest
                 try
                 {
                     int cntLog = 0;// 插入数据计数
-                    string sql = @"INSERT INTO UserInformation
+                    string sql = @"INSERT INTO UserInformation2
 	                                (
 	                                PaymentAccount,
 	                                CustomerName,
@@ -159,29 +159,17 @@ namespace ExcelTest
                     SqlParameter[] sqlParameterArray = new SqlParameter[] { sp0, sp1, sp2, sp3, sp4, sp5, sp6, sp7, sp8 };
                     foreach (var item in excelList)
                     {
-                        sqlParameterArray[0].Value = item.PaymentAccount;
-                        sqlParameterArray[1].Value = item.CustomerName;
-                        sqlParameterArray[2].Value = item.Adress;
+                        sqlParameterArray[0].Value = item.PaymentAccount == null ? "" : item.PaymentAccount;
+                        sqlParameterArray[1].Value = item.CustomerName == null ? "" : item.CustomerName;
+                        sqlParameterArray[2].Value = item.Adress == null ? "" : item.Adress;
                         sqlParameterArray[3].Value = item.PhoneNumber == null ? "" : item.PhoneNumber;
                         sqlParameterArray[4].Value = item.GasType == null ? "" : item.GasType;
                         sqlParameterArray[5].Value = item.FactoryNumber == null ? "" : item.FactoryNumber;
-                        sqlParameterArray[6].Value = item.Area;
-                        sqlParameterArray[7].Value = item.Community;
-                        sqlParameterArray[8].Value = item.Floor;
-                        //spList.Clear();  // 清空List
-                        //spList.Add(sp0);
-                        //spList.Add(sp1);
-                        //spList.Add(sp2);
-                        //spList.Add(sp3);
-                        //spList.Add(sp4);
-                        //spList.Add(sp5);
-                        //spList.Add(sp6);
-                        //spList.Add(sp7);
-                        //spList.Add(sp8);
-                        //SqlCommand sqlCmd = sqlHelper.GetCommand(sql, spList);
-                        //int result = sqlCmd.ExecuteNonQuery();
-                        //sqlHelper.GetExecuteNonQuery(sql, spList);
-                        command.Parameters.Clear();
+                        sqlParameterArray[6].Value = item.Area == null ? "" : item.Area;
+                        sqlParameterArray[7].Value = item.Community == null ? "" : item.Community;
+                        sqlParameterArray[8].Value = item.Floor == null ? "" : item.Floor;
+             
+                        command.Parameters.Clear();// 参数清空
                         command.Parameters.AddRange(sqlParameterArray);
                         cntLog += command.ExecuteNonQuery();
 

@@ -87,7 +87,8 @@ namespace ExcelTest
 
                 for (int row = rowStart + 1; row <= rowEnd; row++)
                 {
-                    T result = new T();
+                    T result = new T();//编译时能确定T的类型，就用new
+                    //T result = Activator.CreateInstance<T>();//运行时才能确定T的类型，用CreateInstance
 
                     //为对象T的各属性赋值
                     foreach (PropertyInfo p in propertyInfoList)
@@ -165,7 +166,7 @@ namespace ExcelTest
             DataTable dt = ds.Tables[tableIndext]; //取得DataSet里的一个下标为tableIndext的表，然后赋给dt  
 
             IList<T> list = new List<T>();  //实例化一个list  
-            // 在这里写 获取T类型的所有公有属性。 注意这里仅仅是获取T类型的公有属性，不是公有方法，也不是公有字段，当然也不是私有属性                                                 
+            // 获取T类型的所有公有属性。 注意这里仅仅是获取T类型的公有属性，不是公有方法，也不是公有字段，当然也不是私有属性                                                 
             PropertyInfo[] tMembersAll = typeof(T).GetProperties();
 
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -185,8 +186,7 @@ namespace ExcelTest
                             //dt.Rows[i][j]表示取dt表里的第i行的第j列；DBNull是指数据库中当一个字段没有被设置值的时候的值，相当于数据库中的“空值”。   
                             if (dt.Rows[i][j] != DBNull.Value)
                             {
-                                //SetValue是指：将指定属性设置为指定值。 tMember是T泛型对象t的一个公有成员，整条代码的意思就是：将dt.Rows[i][j]赋值给t对象的tMember成员,参数详情请参照http://msdn.microsoft.com/zh-cn/library/3z2t396t(v=vs.100).aspx/html  
-                                // TODO:模型类型和DataTable的类型不一致，如一个是int，一个是string
+                                //SetValue是指：将指定属性设置为指定值。 tMember是T泛型对象t的一个公有成员，整条代码的意思就是：将dt.Rows[i][j]赋值给t对象的tMember成员,参数详情请参照http://msdn.microsoft.com/zh-cn/library/3z2t396t(v=vs.100).aspx/html
                                 tMember.SetValue(t, dt.Rows[i][j], null);
 
                             }
