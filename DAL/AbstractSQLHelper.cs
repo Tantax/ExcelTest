@@ -15,7 +15,7 @@ namespace Dal
         /// <summary>
         /// 打开连接
         /// </summary>
-        private void GetConnection()
+        private void OpenConnection()
         {
             if (con == null)
             {
@@ -29,7 +29,7 @@ namespace Dal
         }
         public SqlConnection GetConnectionObject()
         {
-            GetConnection();
+            OpenConnection();
             return con;
         }
         /// <summary>
@@ -51,7 +51,7 @@ namespace Dal
         /// <returns></returns>
         public SqlCommand GetCommand(string sql, params SqlParameter[] pars)
         {
-            GetConnection();
+            OpenConnection();
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandText = sql;
             if (pars != null)
@@ -62,7 +62,7 @@ namespace Dal
         }
         public SqlCommand GetCommand(string sql, List<SqlParameter> pars)
         {
-            GetConnection();
+            OpenConnection();
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandText = sql;
             if (pars != null)
@@ -76,7 +76,7 @@ namespace Dal
         }
         public SqlCommand GetCommand(string sql)
         {
-            GetConnection();
+            OpenConnection();
             SqlCommand cmd = con.CreateCommand();
             cmd.CommandText = sql;
             return cmd;

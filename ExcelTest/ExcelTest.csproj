@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EPPlus">
-      <HintPath>..\..\..\..\..\下载\EPPlus 4.0.5\EPPlus.dll</HintPath>
+      <HintPath>..\Lib\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,6 +49,10 @@
   <ItemGroup>
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="ExcelModel.cs" />
+    <Compile Include="ExcelTestDBDataSet1.cs">
+      <DependentUpon>ExcelTestDBDataSet1.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ExcelTestDBDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

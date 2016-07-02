@@ -53,8 +53,6 @@ namespace ExcelTest
         #endregion
 
 
-
-
         #region 从Excel中加载数据（泛型）
         /// <summary>
         /// 从Excel中加载数据（泛型）
@@ -147,6 +145,8 @@ namespace ExcelTest
             return resultList;
         }
         #endregion
+
+
 
         #region DataSet转List
         /// <summary>  
