@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelTest", "ExcelTest\Exce
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{FA4B706A-83B9-46AD-BECA-A4600660E68A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPPlusLib", "EPPlusLib\EPPlusLib.csproj", "{BADABDC6-8722-4AE7-80DD-D6B5335FF30F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FA4B706A-83B9-46AD-BECA-A4600660E68A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA4B706A-83B9-46AD-BECA-A4600660E68A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA4B706A-83B9-46AD-BECA-A4600660E68A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BADABDC6-8722-4AE7-80DD-D6B5335FF30F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BADABDC6-8722-4AE7-80DD-D6B5335FF30F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BADABDC6-8722-4AE7-80DD-D6B5335FF30F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BADABDC6-8722-4AE7-80DD-D6B5335FF30F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

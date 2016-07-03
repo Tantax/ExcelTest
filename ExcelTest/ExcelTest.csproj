@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPPlus">
-      <HintPath>..\Lib\EPPlus.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,11 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExcelHelper.cs" />
     <Compile Include="ExcelModel.cs" />
     <Compile Include="ExcelTestDBDataSet1.cs">
       <DependentUpon>ExcelTestDBDataSet1.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ExcelTestDBDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -106,6 +101,10 @@
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{fa4b706a-83b9-46ad-beca-a4600660e68a}</Project>
       <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPPlusLib\EPPlusLib.csproj">
+      <Project>{badabdc6-8722-4ae7-80dd-d6b5335ff30f}</Project>
+      <Name>EPPlusLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
