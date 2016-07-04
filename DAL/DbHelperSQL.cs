@@ -18,8 +18,8 @@ namespace Com.Common.DB
     {
         //数据库连接字符串(web.config来配置)，多数据库可使用DbHelperSQLP来实现.
         //public static string connectionString = ConfigHelper.DefaultConnectionStr;
-        public static string connectionString = WebConfigurationManager.ConnectionStrings["connectionString"].ToString();
-        //System.Configuration.ConfigurationManager.ConnectionStrings["connectionString"];
+        //public static string connectionString = WebConfigurationManager.ConnectionStrings["connectionString"].ToString();
+        public static string connectionString = ConfigurationManager.AppSettings["connectionString"];
         public DbHelperSQL()
         {            
         }
