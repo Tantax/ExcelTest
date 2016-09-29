@@ -132,7 +132,7 @@ namespace ExcelTest
                 try
                 {
                     int cntLog = 0;// 插入数据计数
-                    string sql = @"INSERT INTO UserInformation2
+                    string sql = @"INSERT INTO UserInformation3
 	                                (
 	                                PaymentAccount,
 	                                CustomerName,

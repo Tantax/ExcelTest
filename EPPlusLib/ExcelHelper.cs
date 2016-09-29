@@ -93,8 +93,8 @@ namespace EPPlusLib
                     {
                         try
                         {
-                            ExcelRange cell = worksheet.Cells[row, dictHeader[p.Name]]; //与属性名对应的单元格
-
+                            ExcelRange cell = worksheet.Cells[row, dictHeader[p.Name]]; // 按属性名取对应的单元格
+                            //ExcelRange cell = worksheet.Cells[row, dictHeader[p.GetCustomAttribute<DisplayNameAttribute>().DisplayName]]; // 按属性名特性取对应的单元格
                             if (cell.Value == null)
                                 continue;
                             switch (p.PropertyType.Name.ToLower())
