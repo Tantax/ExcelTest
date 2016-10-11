@@ -85,8 +85,9 @@ namespace EPPlusLib
 
                 for (int row = rowStart + 1; row <= rowEnd; row++)
                 {
-                    T result = new T();//编译时能确定T的类型，就用new
+                    //T result = new T();//编译时能确定T的类型，就用new，但最好不要再这里new，因为如果遇到Excel空行，这里不好判断
                     //T result = Activator.CreateInstance<T>();//运行时才能确定T的类型，用CreateInstance
+                    T result = default(T); // default(T)意思就是泛型的默认值，我们自己知道T为对象，所以为空
 
                     //为对象T的各属性赋值
                     foreach (PropertyInfo p in propertyInfoList)
@@ -95,8 +96,8 @@ namespace EPPlusLib
                         {
                             ExcelRange cell = worksheet.Cells[row, dictHeader[p.Name]]; // 按属性名取对应的单元格
                             //ExcelRange cell = worksheet.Cells[row, dictHeader[p.GetCustomAttribute<DisplayNameAttribute>().DisplayName]]; // 按属性名特性取对应的单元格
-                            if (cell.Value == null)
-                                continue;
+                            if (cell.Value == null) continue;
+                            if (result == null) result = new T();// 在这里new，保证这个对象不是Excel空行
                             switch (p.PropertyType.Name.ToLower())
                             {
                                 case "string":
@@ -139,7 +140,10 @@ namespace EPPlusLib
                         catch (KeyNotFoundException ex)
                         { }
                     }
-                    resultList.Add(result);
+                    if (result != null)// 过滤掉Excel空行
+                    {
+                        resultList.Add(result); 
+                    }
                 }
             }
             return resultList;
