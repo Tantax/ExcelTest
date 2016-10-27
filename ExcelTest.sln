@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPPlusLib", "EPPlusLib\EPPlusLib.csproj", "{BADABDC6-8722-4AE7-80DD-D6B5335FF30F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{BF856522-08EB-40B5-A100-F1ACD1418FB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{68CF0CE7-E946-46DC-9387-5CF4888552D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{BADABDC6-8722-4AE7-80DD-D6B5335FF30F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BADABDC6-8722-4AE7-80DD-D6B5335FF30F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BADABDC6-8722-4AE7-80DD-D6B5335FF30F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF856522-08EB-40B5-A100-F1ACD1418FB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF856522-08EB-40B5-A100-F1ACD1418FB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF856522-08EB-40B5-A100-F1ACD1418FB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF856522-08EB-40B5-A100-F1ACD1418FB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68CF0CE7-E946-46DC-9387-5CF4888552D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68CF0CE7-E946-46DC-9387-5CF4888552D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68CF0CE7-E946-46DC-9387-5CF4888552D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68CF0CE7-E946-46DC-9387-5CF4888552D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
